@@ -9,19 +9,7 @@ import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      obj: {},
-    };
-  }
-
-  updtObject = (param) => {
-    this.setState({ obj: param });
-  }
-
   render() {
-    const { obj } = this.state;
     return (
       <BrowserRouter>
         <p>TrybeTunes</p>
@@ -39,7 +27,7 @@ class App extends React.Component {
             path="/search"
             render={ () => (
               <div data-testid="page-search">
-                <Search user={ obj } />
+                <Search />
               </div>
             ) }
           />
