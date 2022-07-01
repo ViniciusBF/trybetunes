@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Carregando from './Carregando';
 
@@ -21,6 +22,17 @@ class Header extends React.Component {
     this.setState({ user: name, isLoading: false });
   }
 
+  renderHeader = (user) => (
+    <>
+      <p data-testid="header-user-name">{ `Olá ${user}` }</p>
+      <nav>
+        <Link to="/search" data-testid="link-to-search">Pesquisa</Link>
+        <Link to="/favorites" data-testid="link-to-favorites">Favoritas</Link>
+        <Link to="/profile" data-testid="link-to-profile">Perfil</Link>
+      </nav>
+    </>
+  )
+
   render() {
     const { user, isLoading } = this.state;
     return (
@@ -28,7 +40,7 @@ class Header extends React.Component {
         {
           isLoading
             ? <Carregando />
-            : <p data-testid="header-user-name">{ `Olá ${user}` }</p>
+            : this.renderHeader(user)
         }
       </header>
     );
