@@ -17,9 +17,9 @@ class App extends React.Component {
           <Route
             exact
             path="/"
-            render={ () => (
+            render={ (props) => (
               <div data-testid="page-login">
-                <Login />
+                <Login { ...props } />
               </div>
             ) }
           />
