@@ -33,9 +33,9 @@ class App extends React.Component {
           />
           <Route
             path="/album/:id"
-            render={ () => (
+            render={ (props) => (
               <div data-testid="page-album">
-                <Album />
+                <Album { ...props } />
               </div>
             ) }
           />
