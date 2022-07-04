@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import Carregando from '../components/Carregando';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
   constructor() {
@@ -33,27 +33,23 @@ class Album extends React.Component {
     }));
   }
 
-  favoritesMu = (target) => {
-    const { id, checked } = target;
-    const obj = { trackId: Number(id) };
+  favoritesMu = async (obj, checked) => {
+    this.setState({ isLoading: true });
     if (checked) {
-      this.setState((prev) => ({
-        favorites: [...prev.favorites, obj],
-      }));
+      await addSong(obj);
     } else {
-      this.setState((prev) => ({
-        favorites: prev.favorites.filter(({ trackId }) => trackId !== obj.trackId),
-      }));
+      await removeSong(obj);
     }
+    await this.recuperarMusicas();
+    this.setState({ isLoading: false });
   };
 
-  clickButton = async ({ target }) => {
+  clickButton = ({ target }) => {
     this.setState({ isLoading: true });
-    this.favoritesMu(target);
-    const { name, id, value } = target;
+    const { name, id, value, checked } = target;
     const num = Number(id);
-    await addSong({ trackId: num, trackName: name, previewUrl: value, kind: 'song' });
-    this.setState({ isLoading: false });
+    const obj = { trackId: num, trackName: name, previewUrl: value, kind: 'song' };
+    this.favoritesMu(obj, checked);
   }
 
   criarLista = async () => {
