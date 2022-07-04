@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
+import Carregando from '../components/Carregando';
+import { addSong } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
   constructor() {
@@ -12,11 +14,35 @@ class Album extends React.Component {
       albumName: '',
       albums: [],
       check: false,
+      isLoading: false,
+      favorites: [],
     };
   }
 
   componentDidMount() {
     this.criarLista();
+  }
+
+  favoritesMu = (target) => {
+    const { id, checked } = target;
+    const obj = { trackId: Number(id) };
+    if (checked) {
+      this.setState((prev) => ({
+        favorites: [...prev.favorites, obj],
+      }));
+    } else {
+      this.setState((prev) => ({
+        favorites: prev.favorites.filter(({ trackId }) => trackId !== obj.trackId),
+      }));
+    }
+  };
+
+  clickButton = async ({ target }) => {
+    this.setState({ isLoading: true });
+    this.favoritesMu(target);
+    const { name, id, value } = target;
+    await addSong({ trackId: id, trackName: name, previewUrl: value, kind: 'song' });
+    this.setState({ isLoading: false });
   }
 
   criarLista = async () => {
@@ -33,21 +59,33 @@ class Album extends React.Component {
   }
 
   render() {
-    const { name, albumName, albums, check } = this.state;
+    const { favorites, isLoading, name, albumName, albums, check } = this.state;
     return (
       <>
         <Header />
-        <div>
-          <h2 data-testid="artist-name">{ name }</h2>
-          <h2 data-testid="album-name">{ `${albumName} - ${name}` }</h2>
-        </div>
-        <div>
-          { check && albums.map((e) => (
-            <div key={ e.trackId }>
-              <MusicCard previewUrl={ e.previewUrl } trackName={ e.trackName } />
-            </div>
-          ))}
-        </div>
+        {
+          isLoading
+            ? <Carregando />
+            : (
+              <>
+                <div>
+                  <h2 data-testid="artist-name">{ name }</h2>
+                  <h2 data-testid="album-name">{ `${albumName} - ${name}` }</h2>
+                </div>
+                <div>
+                  { check && albums.map((e) => (
+                    <div key={ e.trackId }>
+                      <MusicCard
+                        event={ this.clickButton }
+                        track={ e }
+                        boo={ favorites.some(({ trackId }) => trackId === e.trackId) }
+                      />
+                    </div>
+                  ))}
+                </div>
+              </>
+            )
+        }
       </>
     );
   }
