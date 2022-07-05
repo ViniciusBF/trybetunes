@@ -49,9 +49,9 @@ class App extends React.Component {
           />
           <Route
             path="/profile/edit"
-            render={ () => (
+            render={ (props) => (
               <div data-testid="page-profile-edit">
-                <ProfileEdit />
+                <ProfileEdit { ...props } />
               </div>
             ) }
           />

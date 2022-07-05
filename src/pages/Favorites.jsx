@@ -33,6 +33,7 @@ class Favorites extends React.Component {
 
   render() {
     const { isLoading, favorites } = this.state;
+    const valor = true;
     return (
       <>
         <Header />
@@ -40,15 +41,19 @@ class Favorites extends React.Component {
           isLoading
             ? <Carregando />
             : (
-              favorites.map((e) => (
-                <div key={ e.trackId }>
-                  <MusicCard
-                    event={ this.removerFav }
-                    track={ e }
-                    boo="true"
-                  />
-                </div>
-              ))
+              favorites.map((e) => {
+                const { trackId, trackName, previewUrl } = e;
+                const obj = { trackId: Number(trackId), trackName, previewUrl };
+                return (
+                  <div key={ e.trackId }>
+                    <MusicCard
+                      event={ this.removerFav }
+                      track={ obj }
+                      boo={ valor }
+                    />
+                  </div>
+                );
+              })
             )
         }
       </>

@@ -14,10 +14,10 @@ class Profile extends React.Component {
   }
 
   componentDidMount() {
-    this.dadosUser();
+    this.recuperarDados();
   }
 
-  dadosUser = async () => {
+  recuperarDados = async () => {
     const obj = await getUser();
     this.setState({ isLoading: false, user: obj });
   }
