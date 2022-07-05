@@ -1,0 +1,11 @@
+.mCard {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.audio {
+  align-items: center;
+  display: flex;
+  grid-gap: 7px;
+}

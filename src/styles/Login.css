@@ -1,0 +1,25 @@
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+}
+
+.form {
+  align-items: center;
+  border: 3px solid blue;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 5px;
+  padding: 40px;
+}
+
+.input-login {
+  padding: 5px;
+}
+
+.login-h1 {
+  color: blue;
+}

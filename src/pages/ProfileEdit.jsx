@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Carregando from '../components/Carregando';
 import Header from '../components/Header';
 import { getUser, updateUser } from '../services/userAPI';
+import '../styles/ProfileEdit.css';
 
 class ProfileEdit extends React.Component {
   constructor() {
@@ -69,9 +70,11 @@ class ProfileEdit extends React.Component {
           isLoading
             ? <Carregando />
             : (
-              <form>
-                <div>
-                  <img src={ user.image } alt="foto" />
+              <form className="form-edit">
+                <div className="img">
+                  <div className="foto">
+                    <img src={ user.image } alt="foto" />
+                  </div>
                   <label htmlFor="image">
                     Imagem
                     <input

@@ -5,6 +5,7 @@ import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import Carregando from '../components/Carregando';
 import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
+import '../styles/Album.css';
 
 class Album extends React.Component {
   constructor() {
@@ -75,7 +76,7 @@ class Album extends React.Component {
             ? <Carregando />
             : (
               <>
-                <div>
+                <div className="titulos">
                   <h2 data-testid="artist-name">{ name }</h2>
                   <h2 data-testid="album-name">{ `${albumName} - ${name}` }</h2>
                 </div>

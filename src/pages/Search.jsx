@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Carregando from '../components/Carregando';
+import '../styles/Search.css';
 
 class Search extends React.Component {
   constructor() {
@@ -37,7 +38,7 @@ class Search extends React.Component {
       return (
         <>
           <h3>{`Resultado de álbuns de: ${artist}`}</h3>
-          <div>
+          <div className="caixa">
             {
               albums.map(({
                 artistName,
@@ -45,7 +46,7 @@ class Search extends React.Component {
                 collectionName,
                 artworkUrl100,
               }) => (
-                <div key={ collectionId }>
+                <div className="cards" key={ collectionId }>
                   <div>
                     <img src={ artworkUrl100 } alt={ collectionName } />
                   </div>
@@ -67,7 +68,7 @@ class Search extends React.Component {
   }
 
   renderForm = (search, check) => (
-    <form>
+    <form className="form-busca">
       <div>
         <input
           data-testid="search-artist-input"

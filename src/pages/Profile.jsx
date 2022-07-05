@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Carregando from '../components/Carregando';
 import { getUser } from '../services/userAPI';
+import '../styles/Profile.css';
 
 class Profile extends React.Component {
   constructor() {
@@ -31,19 +32,21 @@ class Profile extends React.Component {
           isLoading
             ? <Carregando />
             : (
-              <div>
-                <img
-                  data-testid="profile-image"
-                  src={ user.image }
-                  alt={ `foto do perfil de ${user.name}` }
-                />
-                <h4>Nome</h4>
-                <p>{ user.name }</p>
-                <h4>E-mail</h4>
-                <p>{ user.email }</p>
-                <h4>Descrição</h4>
-                <p>{ user.description }</p>
-                <div>
+              <div className="perfil">
+                <div className="dados">
+                  <img
+                    data-testid="profile-image"
+                    src={ user.image }
+                    alt={ `foto do perfil de ${user.name}` }
+                  />
+                  <h4>Nome</h4>
+                  <p>{ user.name }</p>
+                  <h4>E-mail</h4>
+                  <p>{ user.email }</p>
+                  <h4>Descrição</h4>
+                  <p>{ user.description }</p>
+                </div>
+                <div className="link">
                   <Link to="/profile/edit">Editar perfil</Link>
                 </div>
               </div>

@@ -1,0 +1,26 @@
+.perfil {
+  align-items: center;
+  display: flex;
+  grid-gap: 35px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.dados {
+  border: 1px solid black;
+  padding: 15px;
+  width: 30%;
+}
+
+.dados img {
+  width: 100%;
+}
+
+.link a {
+  background-color: blue;
+  border-radius: 5px;
+  color: white;
+  font-weight: 800;
+  padding: 5px;
+  text-decoration: none;
+}

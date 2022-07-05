@@ -1,0 +1,29 @@
+.form-edit {
+  align-items: center;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 7px;
+  margin: 40px auto;
+  padding: 15px;
+  width: 40%;
+}
+
+.form-edit label input {
+  display: block;
+  padding: 5px;
+}
+
+.foto {
+  width: 70%;
+}
+
+.foto img {
+  width: 100%;
+}
+
+.img {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
