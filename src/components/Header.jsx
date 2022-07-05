@@ -24,7 +24,10 @@ class Header extends React.Component {
 
   renderHeader = (user) => (
     <>
-      <p data-testid="header-user-name">{ `Olá ${user}` }</p>
+      <p>
+        Olá
+        <span data-testid="header-user-name">{` ${user}`}</span>
+      </p>
       <nav>
         <Link to="/search" data-testid="link-to-search">Pesquisa</Link>
         <Link to="/favorites" data-testid="link-to-favorites">Favoritas</Link>
